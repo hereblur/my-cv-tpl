@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+	<head>
+        <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <div class="container" id="source">
+            <div class="no-break-in profile-section">
+                <div class="profile-image">
+                    <img src="https://graph.facebook.com/537359327/picture?type=large">
+                </div>
+                <div class="profile-data">
+                    <h1 class="underline">
+                        <span class="hilite caps">{{name.first}}</span> <span class="caps">{{name.last}}</span>
+                        <span class="address">{{address}}</span>
+                    </h1>
+
+                    <div class="profile">
+                        <div class="half">
+                            {{#each contact}}
+                                <span class="hilite">{{icon @key}}:</span> {{url this}}<br>
+                            {{/each}}
+                        </div>
+                        <div class="half has-text-right">
+                            {{#each profile}}
+                                <span class="hilite">{{@key}}:</span> {{br this}}<br>
+                            {{/each}}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            {{#each sections-pre}}
+            <div class="a-section {{this.clazz}} break-inside-do-not">
+                <div class="title">
+                    <div class="underline">{{@key}}</div>
+                </div>
+                <div class="content">
+                    {{hilite this.content}}
+                    {{#if this.list}}
+                        <ul>
+                        {{#each this.list}}
+                            <li>{{hilite this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
+            </div>
+            {{/each}}
+
+            <div class="a-section experiences break-inside-before">
+                <div class="title">
+                    <div class="underline">Careers</div>
+                </div>
+                <div class="content ">
+                    {{#each Experiences}}
+                        <div class="experience break-inside-do-not">
+                            <div class="head">
+                                <div class="underline institute">{{hilite @key}}<span class="is-pulled-right">{{this.period}}</span></div>
+                                <div class="about">{{this.about}}</div>
+                            </div>
+                            {{#each duties}}
+                                <div class="duty">
+                                    <h5>{{@key}}</h5>
+                                    {{list this}}
+                                </div>
+                            {{/each}}
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="a-section experiences break-inside-before">
+                <div class="title">
+                    <div class="underline">Educations</div>
+                </div>
+                <div class="content no-break-in">
+                    {{#each Educations}}
+                        <div class="experience break-inside-do-not">
+                            <div class="head">
+                                <div class="underline institute">{{hilite @key}}<span class="is-pulled-right">{{this.period}}</span></div>
+                                <span class="is-pulled-right">{{this.period}}</span>
+                                <div class="about">{{this.about}}</div>
+                            </div>
+                            {{#each duties}}
+                                <div class="duty">
+                                    <h5>{{@key}}</h5>
+                                    {{list this}}
+                                </div>
+                            {{/each}}
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            {{#each sections-post}}
+            <div class="a-section {{this.clazz}} no-break-in">
+                <div class="title">
+                    <div class="underline">{{@key}}</div>
+                </div>
+                <div class="content">
+                    {{hilite this.content}}
+                </div>
+            </div>
+            {{/each}}
+
+            <div class="grid"></div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
+        <script type="text/javascript" src="supasak.data.js"></script>
+        <script type="text/javascript" >
+            var $me = window.$me;
+            var source = document.getElementById("source")
+
+            Handlebars.registerHelper('icon', function(text) {
+                text = Handlebars.Utils.escapeExpression(text);
+                text = text.replace(/(\#FA\-)([a-z0-9\-]+)/gm, '<i class="icon is-medium fa fa-$2" aria-hidden="true"></i>');
+                return new Handlebars.SafeString(text);
+            });
+            Handlebars.registerHelper('url', function(text) {
+                text = Handlebars.Utils.escapeExpression(text);
+                url = text;
+                text = text.replace(/(https?\:\/\/)(.+)/gm, '<a href="'+url+'" target="_blank">$2</a>');
+                return new Handlebars.SafeString(text);
+            });
+            Handlebars.registerHelper('br', function(text) {
+                text = Handlebars.Utils.escapeExpression(text);
+                text = text.replace(/(\r\n|\n|\r)/gm, '<br>');
+                text = text.replace(/(https?\:\/\/)(.+)/gm, '<a href="'+url+'" target="_blank">$2</a>');
+                return new Handlebars.SafeString(text);
+            });
+            Handlebars.registerHelper('hilite', function(text) {
+                text = text.replace(/~([a-z0-9\/\(\)\ \.\#\+\-\:]+)~/igm, '<span class="hilite">$1</span>');
+                text = text.replace(/(\r\n|\n|\r)/gm, '<br>');
+
+                var links = {
+                    "(ask\ media)" : "https://www.askmedia.co.th",
+                    "(thaismartcard)" : "https://www.thaismartcard.co.th/index.php",
+                    "(edc\ machines)" : "https://www.google.com/search?tbm=isch&q=electronic+data+capture+terminal",
+                    "(wearyouwant\.com)" : "https://www.wearyouwant.com",
+                    "(meb\ e-book)" : "https://www.mebmarket.com",
+                }
+
+                Object.keys(links).map(function(reg){
+                    console.log(new RegExp(reg, "i"))
+                    text = text.replace(new RegExp(reg, "ig"), '<a href="'+links[reg]+'" target="_blank" class="link-reference">$1</a>')
+                })
+
+                return new Handlebars.SafeString(text);
+            });
+            Handlebars.registerHelper('list', function(text) {
+                text = Handlebars.Utils.escapeExpression(text);
+                text = text.replace(/~([a-z0-9\/\(\)\ \.\#\+\-\:]+)~/igm, '<span class="hilite">$1</span>');
+                text = text.split(/(\r\n|\n|\r)/gm);
+                if(text.length > 1) {
+                    text = "<ul>" + text.filter(function(line){ return !!line.trim().length}).map(function(line){ return "<li>" + line + "</li>"}).join('') + "</ul>";
+                }else{
+                    text = text[0];
+                }
+
+                var links = {
+                    "(ask\ media)" : "https://www.askmedia.co.th",
+                    "(thaismartcard)" : "https://www.thaismartcard.co.th/index.php",
+                    "(edc\ machines)" : "https://www.google.com/search?tbm=isch&q=electronic+data+capture+terminal",
+                    "(wearyouwant\.com)" : "https://www.wearyouwant.com",
+                    "(meb\ e-book)" : "https://www.mebmarket.com",
+                }
+
+                Object.keys(links).map(function(reg){
+                    console.log(new RegExp(reg, "i"))
+                    text = text.replace(new RegExp(reg, "ig"), '<a href="'+links[reg]+'" target="_blank" class="link-reference">$1</a>')
+                })
+
+                return new Handlebars.SafeString(text);
+            });
+
+            var html = Handlebars.compile(source.innerHTML)($me);
+            source.innerHTML = html;
+        </script>
+    </body>
+</html>

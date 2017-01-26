@@ -1,0 +1,24 @@
+{
+  "name": "my-cv-tpl",
+  "version": "1.0.0",
+  "description": "My CV Template - easy to update data and build to PDF.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hereblur/my-cv-tpl.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hereblur/my-cv-tpl/issues"
+  },
+  "homepage": "https://github.com/hereblur/my-cv-tpl#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "node-sass": "^4.3.0",
+    "sass": "^0.5.0"
+  }
+}
