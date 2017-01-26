@@ -10,12 +10,12 @@
         <div class="container" id="source">
             <div class="no-break-in profile-section">
                 <div class="profile-image">
-                    <img src="https://graph.facebook.com/537359327/picture?type=large">
+                    <img src="{{photo}}">
                 </div>
                 <div class="profile-data">
                     <h1 class="underline">
                         <span class="hilite caps">{{name.first}}</span> <span class="caps">{{name.last}}</span>
-                        <span class="address">{{address}}</span>
+                        <span class="address is-hidden-mobile is-hidden-tablet">{{address}}</span>
                     </h1>
 
                     <div class="profile">
@@ -83,7 +83,6 @@
                         <div class="experience break-inside-do-not">
                             <div class="head">
                                 <div class="underline institute">{{hilite @key}}<span class="is-pulled-right">{{this.period}}</span></div>
-                                <span class="is-pulled-right">{{this.period}}</span>
                                 <div class="about">{{this.about}}</div>
                             </div>
                             {{#each duties}}
@@ -110,6 +109,12 @@
 
             <div class="grid"></div>
         </div>
+
+        <div class="buttons">
+            <button type="button" onclick="window.print()"><i class="fa fa-print"></i></button>
+            <a href="supasak-sutha.pdf" target="_blank"><i class="fa fa-download"></i></button>
+        </div>
+
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
         <script type="text/javascript" src="supasak.data.js"></script>
         <script type="text/javascript" >

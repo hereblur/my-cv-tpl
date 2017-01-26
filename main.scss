@@ -4,6 +4,7 @@ $yellow: #D6A184;
 $white: #F9EAE1;
 $black: #4a4a4a;
 $leftcolumn-width: 43mm;
+$breakpoint: 768px;
 
 *{
     transition:none!important
@@ -44,16 +45,6 @@ html, body{
     color: inherit;
 }
 
-H1 {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.1rem;
-    .address{
-        display: block;
-        font-size: 1rem;
-    }
-}
-
 @media print {
     .break-before {
         page-break-before: always;
@@ -65,7 +56,8 @@ H1 {
 
 .container {
     background: $white;
-    @media screen {
+
+    @media screen and (min-width: $breakpoint){
         width: 100%;
         padding: 1rem 1rem 1rem 0;
         max-width: 210mm;
@@ -91,30 +83,32 @@ H1 {
 }
 
 .profile-section{
+    H1 {
+        font-size: 2rem;
+        line-height: 4rem;
+
+        .address{
+            display: block;
+            font-size: 1rem;
+        }
+    }
+
     margin-bottom: 1em;
     position: relative;
     .profile-image{
-        width: 25%;
+        width: 20%;
         float: left;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 3rem;
+        height: 1px;
         img{
             border-radius: 50%;
-            border: 20px solid transparent;
-            margin: 1rem;
+            width: 3rem;
+            margin: 0.5em 0 0 0;
         }
     }
 
-    .profile-data{
-        float: left;
-        width: 75%;
-        .profile {
-            white-space: nowrap;
-        }
-    }
-
-    .half{
-        width: 50%;
-        float: left;
-    }
 
     &:after{
         display: block;
@@ -122,18 +116,52 @@ H1 {
         clear: both;
     }
 
+    @media screen and (min-width: $breakpoint){
+        h1{
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.1rem;
+        }
+        .profile-image{
+            width: 25%;
+            float: left;
+            img{
+                border: 20px solid transparent;
+                margin: 1rem;
+                width: auto;
+            }
+        }
+        .profile-data{
+            float: left;
+            width: 75%;
+            .profile {
+                white-space: nowrap;
+            }
+        }
+        .half{
+            width: 50%;
+            float: left;
+        }
+    }
+
 }
 
 .a-section {
 
+    @media screen and (min-width: $breakpoint){
+        padding-left: 25%;
+    }
     padding-top: 1rem;
-    padding-left: 25%;
     padding-bottom: 2rem;
     position: relative;
     vertical-align: top;
 
     &.objective {
-        padding: 2rem 2rem 1rem 25%;;
+        padding: 2rem 0 1rem 0;;
+        @media screen and (min-width: $breakpoint){
+            padding: 2rem 2rem 1rem 25%;
+
+        }
         .content {
             text-align: center;
             font-style: italic;
@@ -148,18 +176,25 @@ H1 {
     }
 
     .title{
-        @media print {
-            color: $black;
+
+        @media screen and (min-width: $breakpoint){
+            color: $white;
+            position: absolute;
+            top:0px;
+            width: $leftcolumn-width;
+            left: 0;
+            padding-left: 10mm;
         }
-        color: $white;
+        @media screen and (max-width: $breakpoint){
+            background: $green;
+            color: $white;
+            padding: 2em 2em;
+        }
+
+        color: $black;
         font-size: 1.2rem;
         padding-top: 1rem;
-        padding-left: 10mm;
         text-transform: uppercase;
-        position: absolute;
-        top:0px;
-        width: $leftcolumn-width;
-        left: 0;
         bottom: 0px;
         margin-bottom: 0px;
         vertical-align: top;
@@ -172,6 +207,18 @@ H1 {
     .experience{
         .head{
             vertical-align: top;
+            @media screen and (max-width: $breakpoint){
+                background: $yellow;
+                padding: 0 2em;
+                .institute span{
+                    display: inline-block;
+                    font-size: 0.8rem;
+                    vertical-align: bottom;
+                }
+                .about {
+                    font-size: 0.8rem;
+                }
+            }
             .institute{
                 font-size: 1.2rem;
                 margin: 0px;
@@ -184,6 +231,7 @@ H1 {
                 vertical-align: top;
             }
             .about{
+                clear: both;
                 font-size: 1rem;
             }
         }
@@ -201,5 +249,50 @@ H1 {
         display: block;
         content: " ";
         clear: both;
+    }
+}
+
+.buttons{
+    @media print {
+        display: none;
+    }
+    @media screen and (max-width: $breakpoint){
+            padding: 0 1rem 1rem 0;
+    }
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    padding: 0 2rem 2rem 0;
+    width: 100%;
+    text-align: right;
+    button, a{
+        width: 6rem;
+        height: 6rem;
+        vertical-align: middle;
+        display: block;
+        text-align: center;
+        float: right;
+        border: 3px solid $red;
+        background: transparent;
+        color: $red;
+        border-radius: 50%;
+        margin: 0.5rem;
+        cursor: pointer;
+        i {
+            display: block;
+            font-size: 3rem;
+            line-height: 6rem * 0.9;
+        }
+        @media screen and (max-width: $breakpoint){
+            width: 3rem;
+            height: 3rem;
+            margin: 0.2rem;
+            background: rgba(255,255,255,0.2);
+            i {
+                font-size: 1.5rem;
+                line-height: 3rem * 0.9;
+            }
+        }
+
     }
 }
