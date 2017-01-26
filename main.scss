@@ -10,6 +10,11 @@ $breakpoint: 768px;
     transition:none!important
 }
 
+@page{
+    size: A4;
+    margin: 0 0 0 0;
+}
+
 @media print {
   html, body {
     width: 210mm;
@@ -57,7 +62,7 @@ html, body{
 .container {
     background: $white;
 
-    @media all and (min-width: $breakpoint){
+    @media screen and (min-width: $breakpoint), print{
         width: 100%;
         padding: 1rem 1rem 1rem 0;
         max-width: 210mm;
@@ -116,7 +121,7 @@ html, body{
         clear: both;
     }
 
-    @media all and (min-width: $breakpoint){
+    @media screen and (min-width: $breakpoint), print{
         h1{
             font-size: 3rem;
             margin-bottom: 1.5rem;
@@ -148,7 +153,7 @@ html, body{
 
 .a-section {
 
-    @media all and (min-width: $breakpoint){
+    @media screen and (min-width: $breakpoint), print{
         padding-left: 25%;
     }
     padding-top: 1rem;
@@ -158,7 +163,7 @@ html, body{
 
     &.objective {
         padding: 2rem 0 1rem 0;;
-        @media all and (min-width: $breakpoint){
+        @media screen and (min-width: $breakpoint), print{
             padding: 2rem 2rem 1rem 25%;
 
         }
@@ -177,7 +182,7 @@ html, body{
 
     .title{
 
-        @media all and (min-width: $breakpoint){
+        @media screen and (min-width: $breakpoint), print{
             color: $white;
             position: absolute;
             top:0px;
